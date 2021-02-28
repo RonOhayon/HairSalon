@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.hair_salon">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/img_main_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/header"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Hair_Salon">
+        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".LocationSetUp" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBLwlp70IthxQjqoZl7HEkoq1lLe7zplkc" />
+
+        <activity android:name=".HairSalonSetUp" />
+        <activity android:name=".registerPage" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

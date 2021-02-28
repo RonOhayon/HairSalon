@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:id="@+id/header"
+        android:orientation="vertical"
+        android:background="@drawable/header"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/main_IMG_logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_main_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_LBL_name"
+            android:layout_alignBottom="@+id/img_main_logo"
+            android:fontFamily="cursive"
+            android:text="Barber Shop"
+            android:textColor="#000000"
+            android:textSize="30dp"
+            android:textStyle="bold">
+
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
+        android:layout_below="@id/header">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/main_Email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:counterEnabled="true"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="text"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/main_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="password"
+                android:inputType="textPassword"/>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/main_password"
+            android:gravity="center">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customer"
+                android:id="@+id/main_CB_customer"
+                android:checked="false"/>
+            <Space
+                android:layout_width="45dp"
+                android:layout_height="wrap_content" />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hairdresser"
+                android:id="@+id/main_CB_hairdresser"
+                android:checked="false"/>
+        </LinearLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_BTN_login"
+            android:text="login"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:background="@color/color2"
+            android:paddingTop="10dp"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_LBL_register"
+            android:text="register"
+            android:textStyle="bold"
+            android:textSize="15dp"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:id="@+id/main_PB_loadBar"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
