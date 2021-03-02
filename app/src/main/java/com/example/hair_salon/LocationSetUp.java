@@ -19,8 +19,8 @@ import java.util.List;
 
 public class LocationSetUp extends AppCompatActivity {
 
-    private Button ls_BTN_set;
-    private ImageView ls_IMG_pin,ls_IMG_BB;
+    private Button lsu_BTN_set;
+    private ImageView lsu_IMG_pin,lsu_IMG_BB;
     private EditText ls_EDT_search;
     private FrameLayout ls_LAY_map;
     Fragment_Map fragment_map;
@@ -40,16 +40,16 @@ public class LocationSetUp extends AppCompatActivity {
     }
 
     private void findView(){
-        ls_BTN_set=findViewById(R.id.ls_BTN_set);
-        ls_IMG_BB=findViewById(R.id.ls_IMG_BB);
-        ls_IMG_pin=findViewById(R.id.ls_IMG_pin);
+        lsu_BTN_set=findViewById(R.id.lsu_BTN_set);
+        lsu_IMG_BB=findViewById(R.id.ls_IMG_BB);
+        lsu_IMG_pin=findViewById(R.id.ls_IMG_pin);
         ls_EDT_search=findViewById(R.id.ls_EDT_search);
-        ls_LAY_map = findViewById(R.id.ls_LAY_map);
+        ls_LAY_map = findViewById(R.id.lsu_LAY_map);
     }
 
     private void initFragment(){
         fragment_map = new Fragment_Map();
-        getSupportFragmentManager().beginTransaction().add(R.id.ls_LAY_map,fragment_map).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.lsu_LAY_map,fragment_map).commit();
 
     }
 

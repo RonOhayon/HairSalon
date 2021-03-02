@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SalonSchedule"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:id="@+id/header"
+        android:orientation="vertical"
+        android:background="@drawable/header"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salon name"
+            android:fontFamily="sans-serif-thin"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:id="@+id/ss_LBL_name"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/header"
+        android:gravity="center">
+
+        <CalendarView
+            android:id="@+id/ss_CLA_calander"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/calander_bg"
+            android:layout_weight="1.25"/>
+        <FrameLayout
+            android:id="@+id/ss_LAY_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/calander_bg"
+            android:layout_weight="0.65"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_back_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ss_IMG_bb"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_menu"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/ss_IMG_menu"
+        />
+</RelativeLayout>

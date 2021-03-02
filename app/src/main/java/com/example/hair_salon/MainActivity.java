@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView main_LBL_name,main_LBL_register;
     private FirebaseAuth mAuth;
     private CheckBox main_CB_customer,main_CB_hairdresser;
-    private ProgressBar main_PB_loadBar;
+
 
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         main_password = findViewById(R.id.main_password);
         main_CB_customer =findViewById(R.id.main_CB_customer);
         main_CB_hairdresser =findViewById(R.id.main_CB_hairdresser);
-        main_PB_loadBar = findViewById(R.id.rPage_PB_loadBar);
+
     }
     private void initView(){
         main_LBL_register.setOnClickListener( new View.OnClickListener() {
@@ -81,7 +81,16 @@ public class MainActivity extends AppCompatActivity {
         main_BTN_login.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainMenuOpen();
+                if(main_CB_hairdresser.isChecked()){
+
+                }
+                if(main_CB_customer.isChecked()){
+                    signIn();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please chose a type",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
@@ -116,24 +125,27 @@ public class MainActivity extends AppCompatActivity {
             main_password.requestFocus();
             return;
         }
-        main_PB_loadBar.setVisibility(View.VISIBLE);
+
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        mainMenuOpen();
+                        CustomerMenuOpen();
                     }
                     else{
                         Toast.makeText(MainActivity.this,"Check your credentials",Toast.LENGTH_LONG).show();
                     }
             }
+
+
         });
 
 
     }
 
-    private void mainMenuOpen(){
-        Intent myIntent = new Intent(this, MainMenu.class);
+
+    private void CustomerMenuOpen(){
+        Intent myIntent = new Intent(this, CustomerMenu.class);
         this.startActivity(myIntent);
     }
 }

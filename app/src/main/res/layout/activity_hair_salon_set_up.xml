@@ -146,7 +146,7 @@
                            android:id="@+id/HairSet_IMG_maleH"
                            android:layout_width="50dp"
                            android:layout_height="50dp"
-                           android:src="@drawable/ic_img_femalehaircut"
+                           android:src="@drawable/img_haircut"
                            />
                        <TextView
                            android:layout_width="wrap_content"

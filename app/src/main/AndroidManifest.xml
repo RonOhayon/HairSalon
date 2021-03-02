@@ -14,7 +14,10 @@
         android:roundIcon="@drawable/header"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hair_Salon">
-        <activity android:name=".MainMenu"></activity>
+        <activity android:name=".SalonSchedule"></activity>
+        <activity android:name=".LocateByMap" />
+        <activity android:name=".CustomerMenu" />
+        <activity android:name=".MainMenu" />
         <activity android:name=".LocationSetUp" />
 
         <meta-data
