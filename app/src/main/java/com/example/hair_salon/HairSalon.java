@@ -21,6 +21,13 @@ public class HairSalon {
         this.straighteningHair = straighteningHair;
         this.location = location;
     }
+    public HairSalon(Location location){
+        hairCut = 50;
+        shave = 25;
+        HairColor = 100;
+        straighteningHair =250;
+        this.location = location;
+    }
 
 
 

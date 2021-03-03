@@ -38,14 +38,14 @@ public class Fragment_List extends Fragment {
             dSchedule.add(7, new DaySchedule("Open", "13:30", "14:00", true));
             dSchedule.add(8, new DaySchedule("Open", "14:00", "14:30", true));
             dSchedule.add(9, new DaySchedule("Open", "14:30", "14:00", true));
-            dSchedule.add(10, new DaySchedule("shahar", "15:00", "15:30", false));
+            dSchedule.add(10, new DaySchedule("open", "15:00", "15:30", true));
             dSchedule.add(11, new DaySchedule("Open", "15:00", "16:00", true));
             dSchedule.add(12, new DaySchedule("Open", "16:00", "16:30", true));
             dSchedule.add(13, new DaySchedule("Open", "16:30", "17:00", true));
             dSchedule.add(14, new DaySchedule("Open", "17:00", "17:30", true));
         }
         Fl_LV_list = view.findViewById(R.id.Fl_LV_list);
-        aryAdapt = new DayScheAdapter(getActivity(),R.layout.list_item,dSchedule);
+        aryAdapt = new DayScheAdapter(getActivity(),R.layout.list_schedule,dSchedule);
         Fl_LV_list.setAdapter(aryAdapt);
     }
 

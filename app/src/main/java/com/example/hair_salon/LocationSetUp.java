@@ -4,30 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.google.android.gms.location.LocationCallback;
-
 import java.util.List;
 
-public class LocationSetUp extends AppCompatActivity {
+public class LocationSetUp extends AppCompatActivity implements callBack_map {
 
-    private Button lsu_BTN_set;
+    public static final String EXTRA_KEY_LAT = "EXTRA_KEY_LAT";
+    public static final String EXTRA_KEY_LONG = "EXTRA_KEY_LONG";
+    public static final String EXTRA_KEY_CHECK = "EXTRA_KEY_CHECK";
+    private Button lsu_BTN_set,find;
     private ImageView lsu_IMG_pin,lsu_IMG_BB;
-    private EditText ls_EDT_search;
-    private FrameLayout ls_LAY_map;
+    private EditText lsu_EDT_search;
+    private FrameLayout lsu_LAY_map;
     Fragment_Map fragment_map;
     LocationManager mLocationManager;
     private Location location;
     double log,lat;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +40,16 @@ public class LocationSetUp extends AppCompatActivity {
         initFragment();
         location = new Location(getLastKnownLocation());
         setLocation();
+        initView();
     }
 
     private void findView(){
         lsu_BTN_set=findViewById(R.id.lsu_BTN_set);
-        lsu_IMG_BB=findViewById(R.id.ls_IMG_BB);
-        lsu_IMG_pin=findViewById(R.id.ls_IMG_pin);
-        ls_EDT_search=findViewById(R.id.ls_EDT_search);
-        ls_LAY_map = findViewById(R.id.lsu_LAY_map);
+        lsu_IMG_BB=findViewById(R.id.lsu_IMG_BB);
+        lsu_IMG_pin=findViewById(R.id.lsu_IMG_pin);
+        lsu_EDT_search=findViewById(R.id.lsu_EDT_search);
+        lsu_LAY_map = findViewById(R.id.lsu_LAY_map);
+
     }
 
     private void initFragment(){
@@ -79,11 +84,52 @@ public class LocationSetUp extends AppCompatActivity {
         return null;
     }
 
-
     private void setLocation(){
-        ls_EDT_search.setText(location.getLatitude()+" : "+location.getLongitude());
+        lsu_EDT_search.setText(location.getLatitude()+" : "+location.getLongitude());
         log=location.getLongitude();
         lat=location.getLatitude();
-        fragment_map.setOnPosition(lat,log);
+
+    }
+
+    private void initView(){
+        lsu_IMG_pin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment_map.setOnPosition(lat,log);
+            }
+        });
+        lsu_IMG_BB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeActivity();
+            }
+        });
+        lsu_BTN_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeAndSend();
+            }
+        });
+    }
+
+    @Override
+    public void sendLocation(double lat, double lng) {
+        lsu_EDT_search.setText(location.getLatitude()+" : "+location.getLongitude());
+        location.setLatitude(lat);
+        location.setLongitude(lng);
+    }
+
+    private void closeActivity() {
+        finish();
+        setResult(RESULT_CANCELED);
+    }
+
+    private void closeAndSend(){
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_KEY_LAT,lat);
+        intent.putExtra(EXTRA_KEY_LONG,log);
+        setResult(RESULT_OK,intent);
+        finish();
+
     }
 }

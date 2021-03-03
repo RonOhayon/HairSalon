@@ -10,7 +10,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class CustomerMenu extends AppCompatActivity {
+public class CustomerMenu extends AppCompatActivity  {
     private Button cm_BTN_byName, cm_BTN_byMap;
     private ImageView cm_IMG_logo,cm_IMG_menu,
            cm_IMG_haircut,cm_IMG_shave,cm_IMG_straightHair,cm_IMG_hairDye;
@@ -29,7 +29,6 @@ public class CustomerMenu extends AppCompatActivity {
 
     private void findView(){
         cm_BTN_byName = findViewById(R.id.cm_BTN_byName);
-        cm_BTN_byMap = findViewById(R.id.cm_BTN_byMap);
 
         cm_IMG_haircut = findViewById(R.id.cm_IMG_haircut);
         cm_IMG_hairDye = findViewById(R.id.cm_IMG_hairDye);
@@ -47,18 +46,6 @@ public class CustomerMenu extends AppCompatActivity {
     }
 
     private void  initView() {
-        cm_BTN_byMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!cm_CB_haircut.isChecked() && !cm_CB_hairDye.isChecked()
-                        && !cm_CB_shave.isChecked() && !cm_CB_straightHair.isChecked()) {
-                    Toast.makeText(CustomerMenu.this, "please check one of the Options", Toast.LENGTH_LONG).show();
-                } else {
-                    openLocateByMap();
-                }
-
-            }
-        });
         cm_BTN_byName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +67,5 @@ public class CustomerMenu extends AppCompatActivity {
 
     }
 
-    private void openLocateByMap(){
-        Intent myIntent = new Intent(this, LocateByMap.class);
-        this.startActivity(myIntent);
-    }
+
 }

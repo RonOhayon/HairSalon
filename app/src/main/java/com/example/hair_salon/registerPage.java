@@ -1,9 +1,11 @@
 package com.example.hair_salon;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,9 +20,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class registerPage extends AppCompatActivity {
+    public static final String EXTRA_KEY_LAT = "EXTRA_KEY_LAT";
+    public static final String EXTRA_KEY_LONG = "EXTRA_KEY_LONG";
+    public static final String EXTRA_KEY_CHECK = "EXTRA_KEY_CHECK";
     private TextView rPage_LBL_SignUp;
     private CheckBox rPage_CB_customer,rPage_CB_hairdresser;
     private com.google.android.material.textfield.TextInputLayout rPage_Name,rPage_email,
@@ -29,6 +35,8 @@ public class registerPage extends AppCompatActivity {
     private ImageView rPage_IMG_BB;
     private FirebaseAuth mAuth;
     private ProgressBar rPage_PB_loadBar;
+    private double lat,lng;
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,9 @@ public class registerPage extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         findView();
         initView();
+        if(getIntent().getIntExtra(EXTRA_KEY_CHECK,-1)==1){
+
+        }
 
     }
 
@@ -64,21 +75,17 @@ public class registerPage extends AppCompatActivity {
                 if( rPage_CB_customer.isChecked()) {
                     cleanErrorLog();
                     registerUser();
-                    closeActivity();
+
 
                 }
                 if(rPage_CB_hairdresser.isChecked()){
                     cleanErrorLog();
                     registerHairdresser();
-                    hairSalonSetUP();
 
-                }
-                else{
-                    Toast.makeText(registerPage.this,"Please chose a type",Toast.LENGTH_LONG).show();
+
                 }
             }
         });
-
         rPage_CB_hairdresser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,10 +159,12 @@ public class registerPage extends AppCompatActivity {
         if (phone.isEmpty()) {
             rPage_phoneNum.setError("phoneNumber is required!");
             rPage_phoneNum.requestFocus();
+            return;
         }
         if (!Patterns.PHONE.matcher(phone).matches()) {
             rPage_phoneNum.setError("please provide a valid Phone number");
             rPage_phoneNum.requestFocus();
+            return;
         }
         if (password.isEmpty()) {
             rPage_password.setError("password is required!");
@@ -167,6 +176,7 @@ public class registerPage extends AppCompatActivity {
             rPage_password.requestFocus();
             return;
         }
+
         rPage_PB_loadBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -181,9 +191,12 @@ public class registerPage extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(registerPage.this,"Register is Successful",Toast.LENGTH_LONG).show();
+                                        closeActivity();
+
                                     }
                                     else {
                                         Toast.makeText(registerPage.this,"Register is failed",Toast.LENGTH_LONG).show();
+                                        return;
                                     }
                                     rPage_PB_loadBar.setVisibility(View.GONE);
                                 }
@@ -192,11 +205,10 @@ public class registerPage extends AppCompatActivity {
                         else {
                             Toast.makeText(registerPage.this,"fail",Toast.LENGTH_LONG).show();
                             rPage_PB_loadBar.setVisibility(View.GONE);
+                            return;
                         }
                     }
                 });
-
-
 
     }
 
@@ -246,7 +258,7 @@ public class registerPage extends AppCompatActivity {
             rPage_password.requestFocus();
             return;
         }
-       if (salonName.isEmpty()){
+        if (salonName.isEmpty()){
            rPage_hairSalonName.setError(("name is required!"));
            rPage_hairSalonName.requestFocus();
            return;
@@ -258,16 +270,28 @@ public class registerPage extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            FirebaseDatabase.getInstance().getReference("HairDrassers")
+                            if(lat==0 || lng ==0){
+                                rPage_hairSalonName.setError("please set Location");
+                                return;
+                            }
+                            Location location = new Location("new");
+                            location.setLatitude(lat);
+                            location.setLongitude(lng);
+
+                            HairSalon hs = new HairSalon(location);
+                            UserHairdresser udh = new UserHairdresser(name,email,password,phone,salonName,hs);
+                            FirebaseDatabase.getInstance().getReference("Salons")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue("null").addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(udh).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         Toast.makeText(registerPage.this,"Register is Successful",Toast.LENGTH_LONG).show();
+                                        closeActivity();
                                     }
                                     else {
                                         Toast.makeText(registerPage.this,"Register is failed",Toast.LENGTH_LONG).show();
+                                        return;
                                     }
                                     rPage_PB_loadBar.setVisibility(View.GONE);
                                 }
@@ -276,9 +300,12 @@ public class registerPage extends AppCompatActivity {
                         else {
                             Toast.makeText(registerPage.this,"fail",Toast.LENGTH_LONG).show();
                             rPage_PB_loadBar.setVisibility(View.GONE);
+                            return;
                         }
                     }
                 });
+
+
 
     }
 
@@ -293,16 +320,32 @@ public class registerPage extends AppCompatActivity {
         rPage_phoneNum.setErrorEnabled(false);
         rPage_hairSalonName.setError(null);
         rPage_hairSalonName.setErrorEnabled(false);
-    }
-
-    private void hairSalonSetUP(){
-        Intent myIntent = new Intent(this, HairSalonSetUp.class);
-        this.startActivity(myIntent);
+        rPage_hairSalonName_location.setError(null);
+        rPage_hairSalonName_location.setErrorEnabled(false);
     }
 
     private void setLocationPage(){
         Intent myIntent = new Intent(this, LocationSetUp.class);
-        this.startActivity(myIntent);
+        startActivityForResult(myIntent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK){
+                lat = data.getDoubleExtra(EXTRA_KEY_LAT,0);
+                lng = data.getDoubleExtra(EXTRA_KEY_LONG,0);
+                rPage_hairSalonName_location.setHint(""+lat+" : "+lng);
+            }if(resultCode == RESULT_CANCELED){
+                rPage_hairSalonName_location.setError("Location is needed!");
+            }
+
+        }
+
+
+
     }
 }
+
 

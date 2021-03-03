@@ -34,7 +34,7 @@
                 android:text="Hair Salon Setting"
                 android:textSize="35dp"
                 android:textStyle="bold"
-                android:fontFamily="cursive"
+                android:fontFamily="sans-serif-thin"
                 android:layout_weight="4"
                 android:id="@+id/HairSet_LBL_title"
                 />
@@ -206,41 +206,7 @@
                                />
                        </com.google.android.material.textfield.TextInputLayout>
                    </LinearLayout>
-                   <LinearLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_weight="1"
-                       android:orientation="vertical"
-                       android:gravity="center">
 
-                       <ImageView
-                           android:id="@+id/HairSet_IMG_pin"
-                           android:layout_width="50dp"
-                           android:layout_height="50dp"
-                           android:src="@drawable/img_pin_drop"
-                           />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Location"
-                           android:textStyle="bold"
-                           android:id="@+id/HairSet_LBL_location"
-                           />
-
-                       <com.google.android.material.textfield.TextInputLayout
-                           android:id="@+id/HairSet_TIP_pin"
-                           android:layout_width="match_parent"
-                           android:layout_height="wrap_content"
-                           app:errorEnabled="true">
-
-                           <com.google.android.material.textfield.TextInputEditText
-                               android:layout_width="match_parent"
-                               android:layout_height="wrap_content"
-                               android:hint="press to set"
-                               android:inputType="text"
-                               />
-                       </com.google.android.material.textfield.TextInputLayout>
-                   </LinearLayout>
 
                </LinearLayout>
            </LinearLayout>

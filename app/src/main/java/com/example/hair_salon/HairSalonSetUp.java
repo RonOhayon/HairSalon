@@ -13,12 +13,12 @@ import android.widget.Toast;
 public class HairSalonSetUp extends AppCompatActivity {
 
     private ImageView HairSet_IMG_maleH,HairSet_IMG_hairDye
-            ,HairSet_IMG_shave,HairSet_IMG_hairDry,HairSet_IMG_pin,HairSet_IMG_BackB;
+            ,HairSet_IMG_shave,HairSet_IMG_hairDry,HairSet_IMG_BackB;
     private Button HairSet_BTN_update;
     private com.google.android.material.textfield.TextInputLayout HairSet_TIP_maleH
-            ,HairSet_TIP_HairDye,HairSet_TIP_shave,HairSet_TIP_straighteningHair,HairSet_TIP_pin;
+            ,HairSet_TIP_HairDye,HairSet_TIP_shave,HairSet_TIP_straighteningHair;
     private HairSalon hairSalon;
-    private TextView HairSet_LBL_location,HairSet_LBL_straightHair,HairSet_LBL_shave,
+    private TextView HairSet_LBL_straightHair,HairSet_LBL_shave,
             HairSet_LBL_haircut,HairSet_LBL_title,HairSet_LBL_dye;
 
 
@@ -33,27 +33,25 @@ public class HairSalonSetUp extends AppCompatActivity {
 
 
     private void findView(){
-        HairSet_BTN_update = HairSet_BTN_update.findViewById(R.id.HairSet_BTN_update);
+        HairSet_BTN_update = findViewById(R.id.HairSet_BTN_update);
 
-        HairSet_IMG_maleH = HairSet_IMG_maleH.findViewById(R.id.HairSet_IMG_maleH);
-        HairSet_IMG_hairDye = HairSet_IMG_hairDye.findViewById(R.id.HairSet_IMG_hairDye);
-        HairSet_IMG_shave = HairSet_IMG_shave.findViewById(R.id.HairSet_IMG_shave);
-        HairSet_IMG_hairDry = HairSet_IMG_hairDry.findViewById(R.id.HairSet_IMG_hairDry);
-        HairSet_IMG_pin = HairSet_IMG_pin.findViewById(R.id.HairSet_IMG_pin);
-        HairSet_IMG_BackB = HairSet_IMG_BackB.findViewById(R.id.HairSet_IMG_BackB);
+        HairSet_IMG_maleH = findViewById(R.id.HairSet_IMG_maleH);
+        HairSet_IMG_hairDye = findViewById(R.id.HairSet_IMG_hairDye);
+        HairSet_IMG_shave = findViewById(R.id.HairSet_IMG_shave);
+        HairSet_IMG_hairDry = findViewById(R.id.HairSet_IMG_hairDry);
+        HairSet_IMG_BackB = findViewById(R.id.HairSet_IMG_BackB);
 
-        HairSet_TIP_maleH = HairSet_TIP_maleH.findViewById(R.id.HairSet_TIP_maleH);
-        HairSet_TIP_HairDye =HairSet_TIP_HairDye.findViewById(R.id.HairSet_TIP_HairDye);
-        HairSet_TIP_shave = HairSet_TIP_shave.findViewById(R.id.HairSet_TIP_shave);
-        HairSet_TIP_straighteningHair =HairSet_TIP_straighteningHair.findViewById(R.id.HairSet_TIP_straighteningHair);
-        HairSet_TIP_pin = HairSet_TIP_pin.findViewById(R.id.HairSet_TIP_pin);
+        HairSet_TIP_maleH = findViewById(R.id.HairSet_TIP_maleH);
+        HairSet_TIP_HairDye =findViewById(R.id.HairSet_TIP_HairDye);
+        HairSet_TIP_shave = findViewById(R.id.HairSet_TIP_shave);
+        HairSet_TIP_straighteningHair =findViewById(R.id.HairSet_TIP_straighteningHair);
 
-        HairSet_LBL_location= HairSet_LBL_location.findViewById(R.id.HairSet_LBL_location);
-        HairSet_LBL_straightHair =HairSet_LBL_straightHair.findViewById(R.id.HairSet_LBL_location);
-        HairSet_LBL_shave=HairSet_LBL_shave.findViewById(R.id.HairSet_LBL_shave);
-        HairSet_LBL_haircut=HairSet_LBL_haircut.findViewById(R.id.HairSet_LBL_haircut);
-        HairSet_LBL_title=HairSet_LBL_title.findViewById(R.id.HairSet_LBL_title);
-        HairSet_LBL_dye= HairSet_LBL_dye.findViewById(R.id. HairSet_LBL_dye);
+
+        HairSet_LBL_straightHair =findViewById(R.id.HairSet_LBL_straightHair);
+        HairSet_LBL_shave=findViewById(R.id.HairSet_LBL_shave);
+        HairSet_LBL_haircut=findViewById(R.id.HairSet_LBL_haircut);
+        HairSet_LBL_title=findViewById(R.id.HairSet_LBL_title);
+        HairSet_LBL_dye= findViewById(R.id. HairSet_LBL_dye);
     }
 
     private void initView(){
@@ -68,16 +66,6 @@ public class HairSalonSetUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setHairSalon();
-                if(HairSet_TIP_pin.getEditText().getText().toString().trim().isEmpty()){
-                    HairSet_TIP_pin.setError("Need location");
-                    return;
-                }
-
-            }
-        });
-        HairSet_TIP_pin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
             }
         });

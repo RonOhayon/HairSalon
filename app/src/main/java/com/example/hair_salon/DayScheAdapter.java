@@ -1,7 +1,6 @@
 package com.example.hair_salon;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ public class DayScheAdapter extends ArrayAdapter<DaySchedule> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if(convertView==null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_schedule,parent,false);
         }
         DaySchedule dSche = getItem(position);
         TextView textView1 = convertView.findViewById(R.id.li_LBL_startHour);

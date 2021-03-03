@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openRegisterFile(){
         Intent myIntent = new Intent(this, registerPage.class);
+        myIntent.putExtra("EXTRA_KEY_CHECK", 0);
         this.startActivity(myIntent);
 
     }
@@ -147,5 +148,6 @@ public class MainActivity extends AppCompatActivity {
     private void CustomerMenuOpen(){
         Intent myIntent = new Intent(this, CustomerMenu.class);
         this.startActivity(myIntent);
+        finish();
     }
 }
